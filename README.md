@@ -1,4 +1,4 @@
 # chef_server
 
-TODO: Enter the cookbook description here.
+###Description: This will create *ubuntu* `Vagrant` machine and will install `chef-server` on it
 

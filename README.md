@@ -96,7 +96,7 @@ Connecting to host server-ubuntu-1404:443
 Successfully verified certificates from `server-ubuntu-1404'
 ```
 
-* Bring another `vagrant` box up:
+* Let's bring another `vagrant` box up and try chopping it using `knife`:
 ```
 knife bootstrap 192.168.38.31 -x vagrant -P vagrant --sudo -N node1.vagrantup.com
 ```

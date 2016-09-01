@@ -3,20 +3,19 @@ driver:
   name: vagrant
 
 provisioner:
-  name: chef_zero
-
-verifier:
-  name: inspec
+  name: chef_solo
 
 platforms:
-  - name: ubuntu-16.04
-  - name: centos-7.2
+  - name: ubuntu-14.04
+    driver:
+      network:
+        - ["private_network", {ip: "192.168.38.34"}]
+      customize:
+        memory: 1536
+        natdnshostresolver1: "on"
 
 suites:
-  - name: default
+  - name: server
     run_list:
       - recipe[chef_server::default]
-    verifier:
-      inspec_tests:
-        - test/recipes
     attributes:

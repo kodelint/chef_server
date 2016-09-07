@@ -33,12 +33,16 @@ suites:
       - recipe[chef_server::default]
     attributes:
 ```
+
 * Attributes: Couple attributes which you can toggle
-`default['chef_server']['admin']['firstname']`
-`default['chef_server']['admin']['lastname']`
-`default['chef_server']['admin']['username']`
-`default['chef_server']['admin']['email']`
-`default['chef_server']['admin']['password']`
+
+```
+default['chef_server']['admin']['firstname']
+default['chef_server']['admin']['lastname']
+default['chef_server']['admin']['username']
+default['chef_server']['admin']['email']
+default['chef_server']['admin']['password']
+```
 
 #### Aftermath:
 

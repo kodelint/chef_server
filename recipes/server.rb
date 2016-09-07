@@ -43,7 +43,6 @@ execute "Create Admin User => #{admin_user}" do
 end
 
 file "/tmp/chef-server-core.#{admin_user}.created" do
-  Chef::Log.info("Creating the gaurd file")
   action :create
 end
 
@@ -59,6 +58,5 @@ execute "Create Organization => #{org_fullname}" do
 end
 
 file "/tmp/chef-server-core.#{org_short}.created" do
-  Chef::Log.info("Creating the gaurd file")
   action :create
 end

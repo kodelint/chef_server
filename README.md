@@ -1,5 +1,6 @@
 ## chef_server + kitchen + vagrant
 - **Description**: This will create **ubuntu-14.04** `Vagrant` machine and will install `chef-server` on it
+
 #### Usages:
 ```bash
 kitchen converge

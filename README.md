@@ -33,6 +33,12 @@ suites:
       - recipe[chef_server::default]
     attributes:
 ```
+* Attributes: Couple attributes which you can toggle
+`default['chef_server']['admin']['firstname']`
+`default['chef_server']['admin']['lastname']`
+`default['chef_server']['admin']['username']`
+`default['chef_server']['admin']['email']`
+`default['chef_server']['admin']['password']`
 
 #### Aftermath:
 
@@ -110,6 +116,10 @@ knife cookbook upload cookbook_name
 ```
 knife bootstrap 192.168.38.31 -N node1.vagrantup.com -r 'cookbook' --ssh-user vagrant --sudo --identity-file  ~/.vagrant.d/insecure_private_key
 ```
-
+### TODO:
+   * Create Admin user in the receipe (done)
+   * Create ORGANIZATION in the receipe
+   * Put the password in databag
+   * Generate the knife configuration for workstation
 
 

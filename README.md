@@ -1,15 +1,10 @@
-### chef_server + kitchen + vagrant
-
-* Description: This will create **ubuntu-14.04** `Vagrant` machine and will install `chef-server` on it
-
+## chef_server + kitchen + vagrant
+- **Description**: This will create **ubuntu-14.04** `Vagrant` machine and will install `chef-server` on it
 #### Usages:
-
 ```bash
 kitchen converge
 ```
-
 * Default `.kitchen.yml`:
-
 ```
 ---
 driver:
@@ -34,8 +29,7 @@ suites:
     attributes:
 ```
 
-* Attributes: Couple attributes which you can toggle
-
+- **Attributes**: Couple of attributes which you can toggle
 ```
 default['chef_server']['admin']['firstname']
 default['chef_server']['admin']['lastname']
@@ -43,28 +37,31 @@ default['chef_server']['admin']['username']
 default['chef_server']['admin']['email']
 default['chef_server']['admin']['password']
 ```
-
+```
+default['chef_server']['orgname']['shortname']
+default['chef_server']['orgname']['fullname']
+```
 #### Aftermath:
-
-* login to the machine
-`kitchen login`
-
-* create **Admin User** and **ORG**
+* Receipe automatically creates the `Admin User` and `Organization`, just change the `attributes` if you want to change something
 ```
-sudo chef-server-ctl user-create admin Chef Admin admin@example.com 123456 --filename admin.pem
-sudo chef-server-ctl org-create example "Example Inc" --association admin --filename example-validator.pem
+default['chef_server']['admin']['firstname']
+default['chef_server']['admin']['lastname']
+default['chef_server']['admin']['username']
+default['chef_server']['admin']['email']
+default['chef_server']['admin']['password']
 ```
-
-* Create `.chef` directory
-`mkdir .chef`
-
+```
+default['chef_server']['orgname']['shortname']
+default['chef_server']['orgname']['fullname']
+```
+* Create `.chef` directory `mkdir .chef`
 * Get the `*.pem` files
 ```
 scp -o stricthostkeychecking=no vagrant@192.168.100.101:/home/vagrant/admin.pem .chef/admin.pem
 scp -o stricthostkeychecking=no vagrant@192.168.100.101:/home/vagrant/example-validator.pem .chef/example-validator.pem
 ```
 
-* Create you knife.rb
+* Create you `knife.rb`
 
 ```
 current_dir = File.dirname(__FILE__)
@@ -80,7 +77,6 @@ cache_options( :path => "#{ENV['HOME']}/.chef/checksums" )
 cookbook_path            ["#{current_dir}/../cookbooks"]
 ```
 * `SSL Error` if you get this:
-
 ```
 ERROR: SSL Validation failure connecting to host: server-ubuntu-1404.vagrantup.com - SSL_connect returned=1 errno=0 state=error: certificate verify failed
 ERROR: Could not establish a secure connection to the server.
@@ -105,25 +101,22 @@ Adding certificate for server-ubuntu-1404 in chef-repo/.chef/trusted_certs/serve
 Connecting to host server-ubuntu-1404:443
 Successfully verified certificates from `server-ubuntu-1404'
 ```
-
 * Let's bring another `vagrant` box up and try chopping it using `knife`:
 ```
 knife bootstrap 192.168.38.31 -x vagrant -P vagrant --sudo -N node1.vagrantup.com
 ```
-
 * Now you are ready to write `cookbooks` upload them to **chef-server** using
 ```
 knife cookbook upload cookbook_name
 ```
-
-* Apply the cookbook
+* Apply the `cookbook`
 ```
 knife bootstrap 192.168.38.31 -N node1.vagrantup.com -r 'cookbook' --ssh-user vagrant --sudo --identity-file  ~/.vagrant.d/insecure_private_key
 ```
 ### TODO:
-   * Create Admin user in the receipe (done)
-   * Create ORGANIZATION in the receipe
-   * Put the password in databag
-   * Generate the knife configuration for workstation
+   * Create `Admin user` in the receipe (done)
+   * Create `ORGANIZATION` in the receipe
+   * Put the password in `databag`
+   * Generate the `knife` configuration for workstation
 
 

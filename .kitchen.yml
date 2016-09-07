@@ -17,5 +17,5 @@ platforms:
 suites:
   - name: server
     run_list:
-      - recipe[chef_server::default]
+      - recipe[chef_server::server]
     attributes:

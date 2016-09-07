@@ -46,3 +46,19 @@ file "/tmp/chef-server-core.#{admin_user}.created" do
   Chef::Log.info("Creating the gaurd file")
   action :create
 end
+
+# Create Admin User
+org_short = "#{node['chef_server']['orgname']['shortname']}"
+org_fullname = "#{node['chef_server']['orgname']['fullname']}"
+org_pem_file = "#{node['chef_server']['orgname']['shortname']}-validator.pem"
+
+execute "Create Organization => #{org_fullname}" do
+  command "chef-server-ctl org-create #{org_short} #{org_fullname} --association #{admin_user} --filename #{admin_pem_file}"
+  action :run
+  not_if { ::File.exist?("/tmp/chef-server-core.#{org_short}.created") }
+end
+
+file "/tmp/chef-server-core.#{org_short}.created" do
+  Chef::Log.info("Creating the gaurd file")
+  action :create
+end

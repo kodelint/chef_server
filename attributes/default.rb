@@ -2,8 +2,13 @@ default['chef_server']['url'] = 'https://packages.chef.io/stable/ubuntu/14.04/ch
 
 default['chef_server']['chef_fqdn'] = node['fqdn']
 
+#Admin user related attributes
 default['chef_server']['admin']['firstname'] = 'Satyajit'
 default['chef_server']['admin']['lastname'] = 'Roy'
 default['chef_server']['admin']['email'] = 'email2sroy@gmail.com'
 default['chef_server']['admin']['username'] = 'uadmin'
 default['chef_server']['admin']['password'] = '123456'
+
+# ORG Related attributes
+default['chef_server']['orgname']['shortname'] = 'learnchef'
+default['chef_server']['orgname']['fullname'] = 'Learnchef Inc'

@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: chef_server
-# Recipe:: default
+# Recipe:: server
 #
 # Copyright (c) 2016 Satyajit Roy, All Rights Reserved.
 package_url = node['chef_server']['url']

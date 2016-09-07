@@ -18,8 +18,12 @@ package package_name do
   notifies :run, 'execute[reconfigure-chef-server]', :immediately
 end
 
+file "/tmp/chef-server-core.firstrun" do
+  action :create
+end
 # reconfigure the installation
 execute 'reconfigure-chef-server' do
   command 'chef-server-ctl reconfigure'
   action :nothing
+  not_if { File.exist?("/tmp/chef-server-core.firstrun") }
 end

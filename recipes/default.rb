@@ -27,3 +27,22 @@ execute 'reconfigure-chef-server' do
   action :nothing
   not_if { File.exist?("/tmp/chef-server-core.firstrun") }
 end
+
+# Create Admin User
+admin_user = "#{node['chef_server']['admin']['username']}"
+admin_fn = "#{node['chef_server']['admin']['firstname']}"
+admin_ln = "#{node['chef_server']['admin']['lastname']}"
+admin_email = "#{node['chef_server']['admin']['email']}"
+admin_password = "#{node['chef_server']['admin']['password']}"
+admin_pem_file = "#{node['chef_server']['admin']['username']}.pem"
+
+execute "Create Admin User => #{admin_user}" do
+  command "chef-server-ctl user-create #{admin_user} #{admin_fn} #{admin_ln} #{admin_email} #{admin_password} --filename #{admin_pem_file}"
+  action :run
+  not_if { ::File.exist?("/tmp/chef-server-core.#{admin_user}.created") }
+end
+
+file "/tmp/chef-server-core.#{admin_user}.created" do
+  Chef::Log.info("Creating the gaurd file")
+  action :create
+end

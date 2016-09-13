@@ -7,6 +7,7 @@ default['chef_server']['admin']['firstname'] = 'Satyajit'
 default['chef_server']['admin']['lastname'] = 'Roy'
 default['chef_server']['admin']['email'] = 'email2sroy@gmail.com'
 default['chef_server']['admin']['username'] = 'uadmin'
+default['chef_server']['admin']['user']['home'] = '/home/vagrant'
 default['chef_server']['admin']['password'] = '123456'
 
 # ORG Related attributes

@@ -32,12 +32,13 @@ end
 admin_user = "#{node['chef_server']['admin']['username']}"
 admin_fn = "#{node['chef_server']['admin']['firstname']}"
 admin_ln = "#{node['chef_server']['admin']['lastname']}"
+admin_home = "#{node['chef_server']['admin']['user']['home']}"
 admin_email = "#{node['chef_server']['admin']['email']}"
 admin_password = "#{node['chef_server']['admin']['password']}"
 admin_pem_file = "#{node['chef_server']['admin']['username']}.pem"
 
 execute "Create Admin User => #{admin_user}" do
-  command "chef-server-ctl user-create #{admin_user} #{admin_fn} #{admin_ln} #{admin_email} #{admin_password} --filename #{admin_pem_file}"
+  command "chef-server-ctl user-create #{admin_user} #{admin_fn} #{admin_ln} #{admin_email} #{admin_password} --filename #{admin_home}/#{admin_pem_file}"
   action :run
   not_if { ::File.exist?("/tmp/chef-server-core.#{admin_user}.created") }
 end
@@ -52,7 +53,7 @@ org_fullname = "#{node['chef_server']['orgname']['fullname']}"
 org_pem_file = "#{node['chef_server']['orgname']['shortname']}-validator.pem"
 
 execute "Create Organization => #{org_fullname}" do
-  command "chef-server-ctl org-create #{org_short} #{org_fullname} --association #{admin_user} --filename #{admin_pem_file}"
+  command "chef-server-ctl org-create #{org_short} #{org_fullname} --association #{admin_user} --filename #{admin_home}/#{org_pem_file}"
   action :run
   not_if { ::File.exist?("/tmp/chef-server-core.#{org_short}.created") }
 end

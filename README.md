@@ -115,9 +115,7 @@ knife cookbook upload cookbook_name
 knife bootstrap 192.168.38.31 -N node1.vagrantup.com -r 'cookbook' --ssh-user vagrant --sudo --identity-file  ~/.vagrant.d/insecure_private_key
 ```
 ### TODO:
-   * Create `Admin user` in the receipe (done)
-   * Create `ORGANIZATION` in the receipe
+   * Create `Admin user` in the receipe :heavy_check_mark:
+   * Create `ORGANIZATION` in the receipe :heavy_check_mark:
    * Put the password in `databag`
    * Generate the `knife` configuration for workstation
-
-
